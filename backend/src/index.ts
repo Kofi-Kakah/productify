@@ -44,4 +44,4 @@ if (ENV.NODE_ENV === "production") {
   });
 }
 
-app.listen(ENV.PORT, () => console.log("Server is up and running on PORT:", ENV.PORT));
+app.listen(ENV.PORT, () => console.log(`Server is up and running on PORT:http://localhost:${ENV.PORT}`));

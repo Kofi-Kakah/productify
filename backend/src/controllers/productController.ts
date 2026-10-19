@@ -32,7 +32,7 @@ export const getMyProducts = async (req: Request, res: Response) => {
 export const getProductById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const product = await queries.getProductById(id);
+    const product = await queries.getProductById(id as string);
 
     if (!product) return res.status(404).json({ error: "Product not found" });
 
@@ -80,7 +80,7 @@ export const updateProduct = async (req: Request, res: Response) => {
     const { title, description, imageUrl } = req.body;
 
     // Check if product exists and belongs to user
-    const existingProduct = await queries.getProductById(id);
+    const existingProduct = await queries.getProductById(id as string);
     if (!existingProduct) {
       res.status(404).json({ error: "Product not found" });
       return;
@@ -91,7 +91,7 @@ export const updateProduct = async (req: Request, res: Response) => {
       return;
     }
 
-    const product = await queries.updateProduct(id, {
+    const product = await queries.updateProduct(id as string, {
       title,
       description,
       imageUrl,
@@ -113,7 +113,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     // Check if product exists and belongs to user
-    const existingProduct = await queries.getProductById(id);
+    const existingProduct = await queries.getProductById(id as string);
     if (!existingProduct) {
       res.status(404).json({ error: "Product not found" });
       return;
@@ -124,7 +124,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
       return;
     }
 
-    await queries.deleteProduct(id);
+    await queries.deleteProduct(id as string);
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     console.error("Error deleting product:", error);
